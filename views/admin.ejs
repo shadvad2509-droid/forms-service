@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Админка — Сервис форм</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <div class="max-w-4xl mx-auto py-10 px-4">
+    <h1 class="text-3xl font-bold mb-8">Админка</h1>
+
+    <div class="bg-white p-6 rounded-lg shadow mb-8">
+      <h2 class="text-xl font-semibold mb-4">Создать форму</h2>
+      <form action="/admin/create" method="POST" class="space-y-4">
+        <input name="title" placeholder="Название формы" required
+               class="w-full p-2 border rounded">
+        <input name="fields" placeholder="Поля через запятую: Имя, Email, Телефон" required
+               class="w-full p-2 border rounded">
+        <button class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+          Создать
+        </button>
+      </form>
+    </div>
+
+    <h2 class="text-xl font-semibold mb-4">Мои формы</h2>
+    <div class="space-y-4">
+      <% forms.forEach(form => { %>
+        <div class="bg-white p-4 rounded-lg shadow">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-semibold text-lg"><%= form.title %></h3>
+              <p class="text-sm text-gray-500">Создана: <%= form.created_at %></p>
+              <p class="mt-2">
+                Публичная ссылка:
+                <a href="/f/<%= form.token %>" class="text-blue-600" target="_blank">
+                  http://localhost:3000/f/<%= form.token %>
+                </a>
+              </p>
+            </div>
+            <a href="/admin/responses/<%= form.id %>"
+               class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">
+              Ответы
+            </a>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</body>
+</html>

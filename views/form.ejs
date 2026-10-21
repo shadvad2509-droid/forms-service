@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= form.title %></title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <div class="max-w-xl mx-auto py-10 px-4">
+    <div class="bg-white p-8 rounded-lg shadow">
+      <h1 class="text-2xl font-bold mb-6"><%= form.title %></h1>
+
+      <form action="/f/<%= form.token %>" method="POST" class="space-y-4">
+        <% form.fields.forEach(field => { %>
+          <div>
+            <label class="block font-medium mb-1"><%= field %></label>
+            <input name="<%= field %>" required
+                   class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+          </div>
+        <% }) %>
+        <button class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+          Отправить
+        </button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
